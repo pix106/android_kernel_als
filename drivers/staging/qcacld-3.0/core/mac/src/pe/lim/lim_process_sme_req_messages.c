@@ -1211,7 +1211,7 @@ static QDF_STATUS lim_send_hal_start_scan_offload_req(tpAniSirGlobal pMac,
 	}
 
 	len = sizeof(tSirScanOffloadReq) +
-		(pScanReq->channelList.numChannels) +
+		pScanReq->channelList.numChannels +
 		pScanReq->uIEFieldLen + pScanReq->oui_field_len;
 
 	pScanOffloadReq = qdf_mem_malloc(len);
@@ -1319,7 +1319,7 @@ static QDF_STATUS lim_send_hal_start_scan_offload_req(tpAniSirGlobal pMac,
 			     pScanReq->probe_req_ie_bitmap,
 			     PROBE_REQ_BITMAP_LEN * sizeof(uint32_t));
 	pScanOffloadReq->oui_field_offset = sizeof(tSirScanOffloadReq) +
-				(pScanOffloadReq->channelList.numChannels) +
+				pScanOffloadReq->channelList.numChannels +
 				pScanOffloadReq->uIEFieldLen;
 	if (pScanOffloadReq->num_vendor_oui != 0) {
 		qdf_mem_copy(
